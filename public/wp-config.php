@@ -101,7 +101,6 @@ if (WP_ENVIRONMENT_TYPE !== 'local') {
     define('WP_DEBUG_LOG', true);
     define('WP_DEBUG_DISPLAY', false);
 }
-define('DOMAIN_CURRENT_SITE', getenv('DOMAIN_CURRENT_SITE'));
 define('WP_HOME', getenv('WP_HOME'));
 define('WP_SITEURL', getenv('WP_SITEURL'));
 define('AUTOMATIC_UPDATER_DISABLED', true);
