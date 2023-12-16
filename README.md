@@ -24,24 +24,34 @@ Contributions welcome. I'm open to ideas on how to stream-line the process.
     ├────── themes
     │
 
+## Getting Started
+
+This template has built in local development! It's pretty dang simple. But you'll need a couple things to get started.
+
 ## Requirements
 
 * Docker
 * Composer
 
-## Getting Started
+### Update Environment Variables
 
-### 1) Install PHP deps via
+Copy `.env.example` to `.env`
+
+You can even use a custom development domain. You'll need to update your hosts file to allow for this but if you wanna dev on local.mydomain.com it's pretty easy! Add `127.0.0.1    local.mydomain.com` to you `/etc/hosts` file and update the `.env` file.
+
+```txt
+DOMAIN=local.mydomain.com
+WP_HOME=https://local.mydomain.com
+WP_SITEURL=https://local.mydomain.com
+```
+
+### Install WP and WP Plugins
 
 ```sh
 composer install
 ```
 
-### 2) Update Environment Variables
-
-Copy `.env.example` to `.env`
-
-### 3) Start the Containers
+### Start the Containers
 
 ```sh
 docker compose up
