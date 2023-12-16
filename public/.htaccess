@@ -1,7 +1,6 @@
-# BEGIN WordPress
 <IfModule mod_rewrite.c>
+# Make sure wp works when intstalled in a sub directory
 RewriteEngine On
-
 RewriteCond %{REQUEST_FILENAME} -f [OR]
 RewriteCond %{REQUEST_FILENAME} -d
 RewriteRule ^ - [L]
@@ -9,12 +8,15 @@ RewriteRule ^(wp-(content|admin|includes).*)  wp/$1 [L]
 RewriteRule ^(wp-(login|cron).php)$ wp/$1 [L]
 RewriteRule ^(wp-(content).*) $1 [L]
 
+# BEGIN WordPress
+
+RewriteEngine On
 RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
 RewriteBase /
 RewriteRule ^index\.php$ - [L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-
 RewriteRule . /index.php [L]
-</IfModule>
+
 # END WordPress
+</IfModule>
