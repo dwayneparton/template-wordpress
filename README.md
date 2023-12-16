@@ -21,9 +21,20 @@ This template provides some thoughts on how get docker and composer to play with
 
 * Docker
 * Composer
-* Node
 
 ## Getting Started
+
+### 1) Install PHP deps via
+
+```sh
+composer install
+```
+
+### 2) Update Environment Variables
+
+Copy `.env.example` to `.env`
+
+### 3) Start the Containers
 
 ```sh
 docker compose up
