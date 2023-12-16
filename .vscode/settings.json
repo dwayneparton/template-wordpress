@@ -1,0 +1,10 @@
+{
+    "intelephense.environment.includePaths": [
+        "vendor"
+    ],
+    "[php]": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "bmewburn.vscode-intelephense-client"
+    },
+    "phpcs.standard": "PSR12"
+}

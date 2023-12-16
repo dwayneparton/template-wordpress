@@ -1,0 +1,79 @@
+version: "3"
+
+services:
+  db:
+    image: mysql
+    command:
+      - --sort_buffer_size=1073741824
+    restart: unless-stopped
+    ports:
+      - 127.0.0.1:3306:3306
+    expose:
+      - 3306
+    security_opt:
+      - seccomp:unconfined
+    environment:
+      MYSQL_ROOT_USER: root
+      MYSQL_ROOT_PASSWORD: qwerty
+      MYSQL_DATABASE: wordpress
+    volumes:
+      - wp-db:/var/lib/mysql
+
+  wp:
+    platform: "linux/amd64"
+    build:
+      context: .
+      dockerfile: .docker/www/Dockerfile
+    restart: unless-stopped
+    volumes:
+      - ./.docker/www/apache2/sites-available:/etc/apache2/sites-available
+      - ./.docker/www/php.ini:/usr/local/etc/php/conf.d/wp.ini
+      - ./public:/var/www/public
+      - ./vendor:/var/www/vendor
+      - ./packages:/var/www/packages
+    env_file:
+      - .env
+    mem_limit: 2gb
+    mem_reservation: 2gb
+    cpus: 0.5
+    depends_on:
+      - db
+
+  lb:
+    build:
+      context: .
+      dockerfile: .docker/load-balancer/Dockerfile
+    restart: unless-stopped
+    ports:
+      - 127.0.0.1:80:80
+      - 127.0.0.1:443:443
+    depends_on:
+      - wp
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    restart: unless-stopped
+    ports:
+      - 8000:80
+    environment:
+      PMA_ARBITRARY: 1
+      PMA_HOST: db
+      UPLOAD_LIMIT: 1024M
+    depends_on:
+      - db
+
+  wp-cli:
+    image: wordpress:cli
+    profiles: ["cli-only"]
+    volumes_from:
+      - wp
+    links:
+      - db:mysql
+    env_file:
+      - .env
+    working_dir: /var/www/public/wp
+    entrypoint: wp
+    command: "--info"
+
+volumes:
+  wp-db:
