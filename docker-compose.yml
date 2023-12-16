@@ -29,8 +29,6 @@ services:
       - ./.docker/www/apache2/sites-available:/etc/apache2/sites-available
       - ./.docker/www/php.ini:/usr/local/etc/php/conf.d/wp.ini
       - ./public:/var/www/public
-      - ./vendor:/var/www/vendor
-      - ./packages:/var/www/packages
     env_file:
       - .env
     mem_limit: 2gb
