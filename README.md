@@ -37,7 +37,7 @@ This template has built in local development! It's pretty dang simple. But you'l
 
 Copy `.env.example` to `.env`
 
-You can even use a custom development domain. You'll need to update your hosts file to allow for this but if you wanna dev on local.mydomain.com it's pretty easy! Add `127.0.0.1    local.mydomain.com` to you `/etc/hosts` file and update the `.env` file.
+You can even use a custom development domain. You'll need to update your hosts file to allow for this but if you wanna dev on local.mydomain.com it's pretty easy! Add `127.0.0.1 local.mydomain.com` to you `/etc/hosts` file and update the `.env` file.
 
 ```txt
 DOMAIN=local.mydomain.com
