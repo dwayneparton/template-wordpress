@@ -1,9 +1,4 @@
 {
-    "name": "dwayneparton/template-wordpress",
-    "description": "Template for installing wordpress with composer",
-    "keywords": [],
-    "license": "MIT",
-    "type": "project",
     "require": {
         "roots/wordpress": "6.4.2",
         "wpackagist-plugin/advanced-custom-fields": "6.2.0",
